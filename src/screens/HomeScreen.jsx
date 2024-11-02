@@ -28,6 +28,19 @@ const HomeScreen = () => {
 
   const cachedSetAge = useMemo(() => handleSetAge(), [age]);
 
+  //* Memo
+  // Component memo hooku kullanılmadan export edildiğinde main state her değiştiğinde alt componentlerde değişiklik olmasa bile render olur. Ancak memo kullanılarak export edildiği zaman sadece ilgili componentin propslarında bir değişiklik olduğu zaman render olur.
+
+  //* useCallback useMemo
+  // Bir fonksiyon props olarak başka bir sayfaya veri gönderdiğinde tıklanmasa bile o fonksiyonu render eder. Fakat useCallback ya da useMemo gibi fonksiyonlar kullanılırsa bu durum ortadan kalkar.
+
+  //* Farkı
+  // useCallback içerisinde fonksiyon çalıştırır.
+  // const deneme = useCallback((parametre)) => {fonksiyon, []};
+
+  // useMemo ise fonksiyonu çağırır.
+  // const deneme = useMemo(() => fonsiyon,[fonksiyonun ne zaman çağrılacağının belirtisi])
+
   return (
     <View style={styles.mainContainer}>
       <View style={styles.headerContainer}>
