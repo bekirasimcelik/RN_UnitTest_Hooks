@@ -1,5 +1,5 @@
 import {FlatList, StyleSheet, Text, View} from 'react-native';
-import React, {useState} from 'react';
+import React, {useState, useCallback} from 'react';
 import PersonCard from '../components/PersonCard';
 import {data} from '../utils/Constants';
 
@@ -7,11 +7,17 @@ const HomeScreen = () => {
   const [isGreen, setIsGreen] = useState(false);
   const [title, setTitle] = useState('Kişi Listesi');
 
-  const setAppTitle = willSetTitle => {
-    for (let i = 0; i < 100000; i++) {
-      setTitle(willSetTitle);
-    }
-  };
+  // const setAppTitle = willSetTitle => {
+  //   for (let i = 0; i < 100000; i++) {}
+
+  //   setTitle(willSetTitle);
+  // };
+
+  const cachedSetAppTitle = useCallback(willSetTitle => {
+    for (let i = 0; i < 100000; i++) {}
+
+    setTitle(willSetTitle);
+  }, []);
 
   return (
     <View style={styles.mainContainer}>
@@ -25,7 +31,7 @@ const HomeScreen = () => {
       <FlatList
         data={data}
         renderItem={({item}) => (
-          <PersonCard setTitle={setAppTitle} personInfo={item} />
+          <PersonCard setTitle={cachedSetAppTitle} personInfo={item} />
         )}
       />
     </View>
