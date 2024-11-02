@@ -5,6 +5,13 @@ import {data} from '../utils/Constants';
 
 const HomeScreen = () => {
   const [isGreen, setIsGreen] = useState(false);
+  const [title, setTitle] = useState('Kişi Listesi');
+
+  const setAppTitle = willSetTitle => {
+    for (let i = 0; i < 100000; i++) {
+      setTitle(willSetTitle);
+    }
+  };
 
   return (
     <View style={styles.mainContainer}>
@@ -12,12 +19,14 @@ const HomeScreen = () => {
         <Text
           style={[styles.title, {color: isGreen ? '#16c784' : 'white'}]}
           onPress={() => setIsGreen(!isGreen)}>
-          Kişi Listesi
+          {title}
         </Text>
       </View>
       <FlatList
         data={data}
-        renderItem={({item}) => <PersonCard personInfo={item} />}
+        renderItem={({item}) => (
+          <PersonCard setTitle={setAppTitle} personInfo={item} />
+        )}
       />
     </View>
   );

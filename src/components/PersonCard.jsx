@@ -1,10 +1,10 @@
 import {Image, StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import React, {memo} from 'react';
 
 const imageUrl =
   'https://images.unsplash.com/photo-1730304053583-f0660928f2f4?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwzOXx8fGVufDB8fHx8fA%3D%3D';
 
-const PersonCard = ({personInfo}) => {
+const PersonCard = ({personInfo, setTitle}) => {
   const {email, first_name, gender, id, last_name, photo} = personInfo;
 
   return (
@@ -14,7 +14,9 @@ const PersonCard = ({personInfo}) => {
           <Image style={styles.imageStyle} source={{uri: photo}} />
         </View>
         <View style={styles.infoContainer}>
-          <Text style={styles.name}>{first_name + ' ' + last_name}</Text>
+          <Text onPress={() => setTitle(first_name)} style={styles.name}>
+            {first_name + ' ' + last_name}
+          </Text>
           <Text style={styles.job}>{email}</Text>
         </View>
       </View>
@@ -27,7 +29,7 @@ const PersonCard = ({personInfo}) => {
   );
 };
 
-export default PersonCard;
+export default memo(PersonCard);
 
 const styles = StyleSheet.create({
   mainContainer: {
