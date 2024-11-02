@@ -4,22 +4,24 @@ import React from 'react';
 const imageUrl =
   'https://images.unsplash.com/photo-1730304053583-f0660928f2f4?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwzOXx8fGVufDB8fHx8fA%3D%3D';
 
-const PersonCard = () => {
+const PersonCard = ({personInfo}) => {
+  const {email, first_name, gender, id, last_name, photo} = personInfo;
+
   return (
     <View style={styles.mainContainer}>
       <View style={styles.leftSide}>
         <View style={styles.imageContainer}>
-          <Image style={styles.imageStyle} source={{uri: imageUrl}} />
+          <Image style={styles.imageStyle} source={{uri: photo}} />
         </View>
         <View style={styles.infoContainer}>
-          <Text style={styles.name}>Bekir Asım Çelik</Text>
-          <Text style={styles.job}>React Native Developer</Text>
+          <Text style={styles.name}>{first_name + ' ' + last_name}</Text>
+          <Text style={styles.job}>{email}</Text>
         </View>
       </View>
 
       <View style={styles.infoContainer}>
-        <Text style={styles.name}>Erkek</Text>
-        <Text style={styles.yas}>25</Text>
+        <Text style={styles.name}>{gender}</Text>
+        <Text style={styles.yas}>{id + 10}</Text>
       </View>
     </View>
   );
@@ -50,16 +52,17 @@ const styles = StyleSheet.create({
   },
   infoContainer: {
     marginBottom: 40,
+    marginRight: 20,
   },
   name: {
     fontWeight: 'bold',
-    fontSize: 15,
+    fontSize: 18,
     marginBottom: 10,
     color: 'white',
   },
   job: {
     color: 'gray',
-    fontSize: 10,
+    fontSize: 11,
     fontWeight: '800',
   },
   leftSide: {
