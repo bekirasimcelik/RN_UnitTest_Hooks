@@ -1,14 +1,14 @@
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React, {memo} from 'react';
 
 const imageUrl =
   'https://images.unsplash.com/photo-1730304053583-f0660928f2f4?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwzOXx8fGVufDB8fHx8fA%3D%3D';
 
-const PersonCard = ({personInfo, setTitle}) => {
+const PersonCard = ({personInfo, setTitle, setAge}) => {
   const {email, first_name, gender, id, last_name, photo} = personInfo;
 
   return (
-    <View style={styles.mainContainer}>
+    <TouchableOpacity style={styles.mainContainer} onPress={() => setAge(id)}>
       <View style={styles.leftSide}>
         <View style={styles.imageContainer}>
           <Image style={styles.imageStyle} source={{uri: photo}} />
@@ -25,7 +25,7 @@ const PersonCard = ({personInfo, setTitle}) => {
         <Text style={styles.name}>{gender}</Text>
         <Text style={styles.yas}>{id + 10}</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
